@@ -1,0 +1,2683 @@
+{
+  "storage" : "model.espresso.weights",
+  "analyses" : {
+
+  },
+  "properties" : {
+
+  },
+  "format_version" : 200,
+  "metadata_in_weights" : [
+
+  ],
+  "layers" : [
+    {
+      "size_of_axes" : 1,
+      "bottom" : "mel_segment",
+      "axes_0" : -2,
+      "weights" : {
+
+      },
+      "nd_axis" : 0,
+      "debug_info" : "28_expand_dim",
+      "top" : "28_expand_dim",
+      "type" : "expand_dims",
+      "name" : "28_expand_dim"
+    },
+    {
+      "pad_r" : 1,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "debug_info" : "28_expanded",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 1,
+      "top" : "28_expanded",
+      "K" : 80,
+      "blob_biases" : 1,
+      "name" : "28_expanded",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 1,
+      "C" : 384,
+      "bottom" : "28_expand_dim",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 0,
+      "pad_value" : 0,
+      "Ny" : 1,
+      "n_parallel" : 1,
+      "blob_weights_f16" : 3
+    },
+    {
+      "size_of_axes" : 1,
+      "bottom" : "28_expanded",
+      "axes_0" : -2,
+      "weights" : {
+
+      },
+      "nd_axis" : 0,
+      "debug_info" : "28",
+      "version" : 1,
+      "top" : "28",
+      "type" : "squeeze",
+      "name" : "28"
+    },
+    {
+      "bottom" : "28",
+      "weights" : {
+
+      },
+      "mode" : 19,
+      "debug_info" : "input.1",
+      "top" : "input.1",
+      "type" : "activation",
+      "name" : "input.1"
+    },
+    {
+      "size_of_axes" : 1,
+      "bottom" : "input.1",
+      "axes_0" : -2,
+      "weights" : {
+
+      },
+      "nd_axis" : 0,
+      "debug_info" : "46_expand_dim",
+      "top" : "46_expand_dim",
+      "type" : "expand_dims",
+      "name" : "46_expand_dim"
+    },
+    {
+      "pad_r" : 1,
+      "fused_relu" : 0,
+      "fused_tanh" : 0,
+      "debug_info" : "46_expanded",
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 1,
+      "top" : "46_expanded",
+      "K" : 384,
+      "blob_biases" : 5,
+      "stride_x" : 2,
+      "name" : "46_expanded",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 1,
+      "C" : 384,
+      "bottom" : "46_expand_dim",
+      "weights" : {
+
+      },
+      "Nx" : 3,
+      "pad_mode" : 0,
+      "pad_value" : 0,
+      "Ny" : 1,
+      "n_parallel" : 1,
+      "blob_weights_f16" : 7
+    },
+    {
+      "size_of_axes" : 1,
+      "bottom" : "46_expanded",
+      "axes_0" : -2,
+      "weights" : {
+
+      },
+      "nd_axis" : 0,
+      "debug_info" : "46",
+      "version" : 1,
+      "top" : "46",
+      "type" : "squeeze",
+      "name" : "46"
+    },
+    {
+      "bottom" : "46",
+      "weights" : {
+
+      },
+      "mode" : 19,
+      "debug_info" : "x.3",
+      "top" : "x.3",
+      "type" : "activation",
+      "name" : "x.3"
+    },
+    {
+      "axis_h" : 0,
+      "axis_w" : 1,
+      "bottom" : "x.3",
+      "axis_k" : 2,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "transpose_32",
+      "top" : "transpose_32",
+      "type" : "transpose",
+      "name" : "transpose_32"
+    },
+    {
+      "top" : "positional_embedding",
+      "w" : 384,
+      "h" : 1500,
+      "name" : "positional_embedding",
+      "nd_rank" : 2,
+      "type" : "load_constant",
+      "k" : 1,
+      "bottom" : "",
+      "debug_info" : "positional_embedding",
+      "n" : 1,
+      "weights" : {
+
+      },
+      "constant_blob" : 9
+    },
+    {
+      "bottom" : "positional_embedding,transpose_32",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "55",
+      "top" : "55",
+      "type" : "elementwise",
+      "name" : "55",
+      "beta" : 0
+    },
+    {
+      "name" : "84_reshape",
+      "weights" : {
+
+      },
+      "dst_w" : 384,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 4,
+      "type" : "reshape",
+      "dst_h" : 1,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "55",
+      "debug_info" : "84_reshape",
+      "dst_seq" : 1,
+      "dst_k" : 1500,
+      "top" : "84_reshape"
+    },
+    {
+      "bottom" : "84_reshape",
+      "weights" : {
+
+      },
+      "eps" : 9.9999997473787516e-06,
+      "debug_info" : "84_mvn",
+      "axis" : 1,
+      "normalization_mode" : 1,
+      "top" : "84_mvn",
+      "type" : "l2_normalize",
+      "name" : "84_mvn"
+    },
+    {
+      "bottom" : "",
+      "k" : 1,
+      "n" : 1,
+      "weights" : {
+
+      },
+      "h" : 1,
+      "debug_info" : "84_scale",
+      "constant_blob" : 11,
+      "top" : "84_scale_constant_in_scale",
+      "w" : 384,
+      "type" : "load_constant",
+      "name" : "84_scale_constant_in_scale"
+    },
+    {
+      "bottom" : "",
+      "k" : 1,
+      "n" : 1,
+      "weights" : {
+
+      },
+      "h" : 1,
+      "debug_info" : "84_scale",
+      "constant_blob" : 13,
+      "top" : "84_scale_constant_in_bias",
+      "w" : 384,
+      "type" : "load_constant",
+      "name" : "84_scale_constant_in_bias"
+    },
+    {
+      "bottom" : "84_mvn,84_scale_constant_in_scale",
+      "alpha" : 1,
+      "operation" : 1,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "84_scale",
+      "top" : "84_scale_mul_out",
+      "type" : "elementwise",
+      "name" : "84_scale_mul_out",
+      "beta" : 0
+    },
+    {
+      "bottom" : "84_scale_mul_out,84_scale_constant_in_bias",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "84_scale",
+      "top" : "84_scale",
+      "type" : "elementwise",
+      "name" : "84_scale",
+      "beta" : 0
+    },
+    {
+      "name" : "84",
+      "weights" : {
+
+      },
+      "dst_w" : 384,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 3,
+      "type" : "reshape",
+      "dst_h" : 1500,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "84_scale",
+      "debug_info" : "84",
+      "dst_seq" : 1,
+      "dst_k" : 1,
+      "top" : "84"
+    },
+    {
+      "nB" : 384,
+      "top" : "q.1",
+      "has_biases" : 1,
+      "blob_weights_f16" : 17,
+      "nC" : 384,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "84",
+      "blob_biases" : 15,
+      "has_tanh" : 0,
+      "debug_info" : "q.1",
+      "name" : "q.1",
+      "has_prelu" : 0
+    },
+    {
+      "nB" : 384,
+      "top" : "k.1",
+      "has_biases" : 1,
+      "blob_weights_f16" : 21,
+      "nC" : 384,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "84",
+      "blob_biases" : 19,
+      "has_tanh" : 0,
+      "debug_info" : "k.1",
+      "name" : "k.1",
+      "has_prelu" : 0
+    },
+    {
+      "nB" : 384,
+      "top" : "v.1",
+      "has_biases" : 1,
+      "blob_weights_f16" : 25,
+      "nC" : 384,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "84",
+      "blob_biases" : 23,
+      "has_tanh" : 0,
+      "debug_info" : "v.1",
+      "name" : "v.1",
+      "has_prelu" : 0
+    },
+    {
+      "name" : "113",
+      "weights" : {
+
+      },
+      "dst_w" : -1,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 4,
+      "type" : "reshape",
+      "dst_h" : 6,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "q.1",
+      "debug_info" : "113",
+      "dst_seq" : 1,
+      "dst_k" : 1500,
+      "top" : "113"
+    },
+    {
+      "top" : "const_28",
+      "w" : 1,
+      "h" : 1,
+      "name" : "const_28",
+      "nd_rank" : 4,
+      "type" : "load_constant",
+      "k" : 1,
+      "bottom" : "",
+      "debug_info" : "const_28",
+      "n" : 1,
+      "weights" : {
+
+      },
+      "constant_blob" : 27
+    },
+    {
+      "bottom" : "113,const_28",
+      "alpha" : 1,
+      "operation" : 1,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "q.3",
+      "top" : "q.3",
+      "type" : "elementwise",
+      "name" : "q.3",
+      "beta" : 0
+    },
+    {
+      "name" : "120",
+      "weights" : {
+
+      },
+      "dst_w" : -1,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 4,
+      "type" : "reshape",
+      "dst_h" : 6,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "k.1",
+      "debug_info" : "120",
+      "dst_seq" : 1,
+      "dst_k" : 1500,
+      "top" : "120"
+    },
+    {
+      "top" : "const_29",
+      "w" : 1,
+      "h" : 1,
+      "name" : "const_29",
+      "nd_rank" : 4,
+      "type" : "load_constant",
+      "k" : 1,
+      "bottom" : "",
+      "debug_info" : "const_29",
+      "n" : 1,
+      "weights" : {
+
+      },
+      "constant_blob" : 29
+    },
+    {
+      "bottom" : "120,const_29",
+      "alpha" : 1,
+      "operation" : 1,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "k.3",
+      "top" : "k.3",
+      "type" : "elementwise",
+      "name" : "k.3",
+      "beta" : 0
+    },
+    {
+      "name" : "127",
+      "weights" : {
+
+      },
+      "dst_w" : -1,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 4,
+      "type" : "reshape",
+      "dst_h" : 6,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "v.1",
+      "debug_info" : "127",
+      "dst_seq" : 1,
+      "dst_k" : 1500,
+      "top" : "127"
+    },
+    {
+      "axis_h" : 0,
+      "axis_w" : 2,
+      "bottom" : "k.3",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "transpose_29",
+      "top" : "transpose_29",
+      "type" : "transpose",
+      "name" : "transpose_29"
+    },
+    {
+      "axis_h" : 2,
+      "axis_w" : 0,
+      "bottom" : "q.3",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "transpose_30",
+      "top" : "transpose_30",
+      "type" : "transpose",
+      "name" : "transpose_30"
+    },
+    {
+      "bottom" : "transpose_30,transpose_29",
+      "weights" : {
+
+      },
+      "debug_info" : "qk.1",
+      "top" : "qk.1",
+      "type" : "batch_matmul",
+      "name" : "qk.1",
+      "channel_mode" : false
+    },
+    {
+      "bottom" : "qk.1",
+      "weights" : {
+
+      },
+      "nd_axis" : -1,
+      "debug_info" : "132",
+      "top" : "132",
+      "type" : "softmax_nd",
+      "name" : "132"
+    },
+    {
+      "axis_h" : 2,
+      "axis_w" : 0,
+      "bottom" : "127",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "transpose_31",
+      "top" : "transpose_31",
+      "type" : "transpose",
+      "name" : "transpose_31"
+    },
+    {
+      "bottom" : "132,transpose_31",
+      "weights" : {
+
+      },
+      "debug_info" : "134",
+      "top" : "134",
+      "type" : "batch_matmul",
+      "name" : "134",
+      "channel_mode" : false
+    },
+    {
+      "axis_h" : 2,
+      "axis_w" : 0,
+      "bottom" : "134",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "transpose_28",
+      "top" : "transpose_28",
+      "type" : "transpose",
+      "name" : "transpose_28"
+    },
+    {
+      "name" : "x.11",
+      "weights" : {
+
+      },
+      "dst_w" : 384,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 3,
+      "type" : "reshape",
+      "dst_h" : 1500,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "transpose_28",
+      "debug_info" : "x.11",
+      "dst_seq" : 1,
+      "dst_k" : 1,
+      "top" : "x.11"
+    },
+    {
+      "nB" : 384,
+      "top" : "142",
+      "has_biases" : 1,
+      "blob_weights_f16" : 33,
+      "nC" : 384,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "x.11",
+      "blob_biases" : 31,
+      "has_tanh" : 0,
+      "debug_info" : "142",
+      "name" : "142",
+      "has_prelu" : 0
+    },
+    {
+      "bottom" : "55,142",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "x.13",
+      "top" : "x.13",
+      "type" : "elementwise",
+      "name" : "x.13",
+      "beta" : 0
+    },
+    {
+      "name" : "148_reshape",
+      "weights" : {
+
+      },
+      "dst_w" : 384,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 4,
+      "type" : "reshape",
+      "dst_h" : 1,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "x.13",
+      "debug_info" : "148_reshape",
+      "dst_seq" : 1,
+      "dst_k" : 1500,
+      "top" : "148_reshape"
+    },
+    {
+      "bottom" : "148_reshape",
+      "weights" : {
+
+      },
+      "eps" : 9.9999997473787516e-06,
+      "debug_info" : "148_mvn",
+      "axis" : 1,
+      "normalization_mode" : 1,
+      "top" : "148_mvn",
+      "type" : "l2_normalize",
+      "name" : "148_mvn"
+    },
+    {
+      "bottom" : "",
+      "k" : 1,
+      "n" : 1,
+      "weights" : {
+
+      },
+      "h" : 1,
+      "debug_info" : "148_scale",
+      "constant_blob" : 35,
+      "top" : "148_scale_constant_in_scale",
+      "w" : 384,
+      "type" : "load_constant",
+      "name" : "148_scale_constant_in_scale"
+    },
+    {
+      "bottom" : "",
+      "k" : 1,
+      "n" : 1,
+      "weights" : {
+
+      },
+      "h" : 1,
+      "debug_info" : "148_scale",
+      "constant_blob" : 37,
+      "top" : "148_scale_constant_in_bias",
+      "w" : 384,
+      "type" : "load_constant",
+      "name" : "148_scale_constant_in_bias"
+    },
+    {
+      "bottom" : "148_mvn,148_scale_constant_in_scale",
+      "alpha" : 1,
+      "operation" : 1,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "148_scale",
+      "top" : "148_scale_mul_out",
+      "type" : "elementwise",
+      "name" : "148_scale_mul_out",
+      "beta" : 0
+    },
+    {
+      "bottom" : "148_scale_mul_out,148_scale_constant_in_bias",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "148_scale",
+      "top" : "148_scale",
+      "type" : "elementwise",
+      "name" : "148_scale",
+      "beta" : 0
+    },
+    {
+      "name" : "148",
+      "weights" : {
+
+      },
+      "dst_w" : 384,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 3,
+      "type" : "reshape",
+      "dst_h" : 1500,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "148_scale",
+      "debug_info" : "148",
+      "dst_seq" : 1,
+      "dst_k" : 1,
+      "top" : "148"
+    },
+    {
+      "nB" : 384,
+      "top" : "input.9",
+      "has_biases" : 1,
+      "blob_weights_f16" : 41,
+      "nC" : 1536,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "148",
+      "blob_biases" : 39,
+      "has_tanh" : 0,
+      "debug_info" : "input.9",
+      "name" : "input.9",
+      "has_prelu" : 0
+    },
+    {
+      "bottom" : "input.9",
+      "weights" : {
+
+      },
+      "mode" : 19,
+      "debug_info" : "x.17",
+      "top" : "x.17",
+      "type" : "activation",
+      "name" : "x.17"
+    },
+    {
+      "nB" : 1536,
+      "top" : "165",
+      "has_biases" : 1,
+      "blob_weights_f16" : 45,
+      "nC" : 384,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "x.17",
+      "blob_biases" : 43,
+      "has_tanh" : 0,
+      "debug_info" : "165",
+      "name" : "165",
+      "has_prelu" : 0
+    },
+    {
+      "bottom" : "x.13,165",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "x.19",
+      "top" : "x.19",
+      "type" : "elementwise",
+      "name" : "x.19",
+      "beta" : 0
+    },
+    {
+      "name" : "190_reshape",
+      "weights" : {
+
+      },
+      "dst_w" : 384,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 4,
+      "type" : "reshape",
+      "dst_h" : 1,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "x.19",
+      "debug_info" : "190_reshape",
+      "dst_seq" : 1,
+      "dst_k" : 1500,
+      "top" : "190_reshape"
+    },
+    {
+      "bottom" : "190_reshape",
+      "weights" : {
+
+      },
+      "eps" : 9.9999997473787516e-06,
+      "debug_info" : "190_mvn",
+      "axis" : 1,
+      "normalization_mode" : 1,
+      "top" : "190_mvn",
+      "type" : "l2_normalize",
+      "name" : "190_mvn"
+    },
+    {
+      "bottom" : "",
+      "k" : 1,
+      "n" : 1,
+      "weights" : {
+
+      },
+      "h" : 1,
+      "debug_info" : "190_scale",
+      "constant_blob" : 47,
+      "top" : "190_scale_constant_in_scale",
+      "w" : 384,
+      "type" : "load_constant",
+      "name" : "190_scale_constant_in_scale"
+    },
+    {
+      "bottom" : "",
+      "k" : 1,
+      "n" : 1,
+      "weights" : {
+
+      },
+      "h" : 1,
+      "debug_info" : "190_scale",
+      "constant_blob" : 49,
+      "top" : "190_scale_constant_in_bias",
+      "w" : 384,
+      "type" : "load_constant",
+      "name" : "190_scale_constant_in_bias"
+    },
+    {
+      "bottom" : "190_mvn,190_scale_constant_in_scale",
+      "alpha" : 1,
+      "operation" : 1,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "190_scale",
+      "top" : "190_scale_mul_out",
+      "type" : "elementwise",
+      "name" : "190_scale_mul_out",
+      "beta" : 0
+    },
+    {
+      "bottom" : "190_scale_mul_out,190_scale_constant_in_bias",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "190_scale",
+      "top" : "190_scale",
+      "type" : "elementwise",
+      "name" : "190_scale",
+      "beta" : 0
+    },
+    {
+      "name" : "190",
+      "weights" : {
+
+      },
+      "dst_w" : 384,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 3,
+      "type" : "reshape",
+      "dst_h" : 1500,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "190_scale",
+      "debug_info" : "190",
+      "dst_seq" : 1,
+      "dst_k" : 1,
+      "top" : "190"
+    },
+    {
+      "nB" : 384,
+      "top" : "q.5",
+      "has_biases" : 1,
+      "blob_weights_f16" : 53,
+      "nC" : 384,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "190",
+      "blob_biases" : 51,
+      "has_tanh" : 0,
+      "debug_info" : "q.5",
+      "name" : "q.5",
+      "has_prelu" : 0
+    },
+    {
+      "nB" : 384,
+      "top" : "k.5",
+      "has_biases" : 1,
+      "blob_weights_f16" : 57,
+      "nC" : 384,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "190",
+      "blob_biases" : 55,
+      "has_tanh" : 0,
+      "debug_info" : "k.5",
+      "name" : "k.5",
+      "has_prelu" : 0
+    },
+    {
+      "nB" : 384,
+      "top" : "v.5",
+      "has_biases" : 1,
+      "blob_weights_f16" : 61,
+      "nC" : 384,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "190",
+      "blob_biases" : 59,
+      "has_tanh" : 0,
+      "debug_info" : "v.5",
+      "name" : "v.5",
+      "has_prelu" : 0
+    },
+    {
+      "name" : "219",
+      "weights" : {
+
+      },
+      "dst_w" : -1,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 4,
+      "type" : "reshape",
+      "dst_h" : 6,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "q.5",
+      "debug_info" : "219",
+      "dst_seq" : 1,
+      "dst_k" : 1500,
+      "top" : "219"
+    },
+    {
+      "top" : "const_30",
+      "w" : 1,
+      "h" : 1,
+      "name" : "const_30",
+      "nd_rank" : 4,
+      "type" : "load_constant",
+      "k" : 1,
+      "bottom" : "",
+      "debug_info" : "const_30",
+      "n" : 1,
+      "weights" : {
+
+      },
+      "constant_blob" : 63
+    },
+    {
+      "bottom" : "219,const_30",
+      "alpha" : 1,
+      "operation" : 1,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "q.7",
+      "top" : "q.7",
+      "type" : "elementwise",
+      "name" : "q.7",
+      "beta" : 0
+    },
+    {
+      "name" : "226",
+      "weights" : {
+
+      },
+      "dst_w" : -1,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 4,
+      "type" : "reshape",
+      "dst_h" : 6,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "k.5",
+      "debug_info" : "226",
+      "dst_seq" : 1,
+      "dst_k" : 1500,
+      "top" : "226"
+    },
+    {
+      "top" : "const_31",
+      "w" : 1,
+      "h" : 1,
+      "name" : "const_31",
+      "nd_rank" : 4,
+      "type" : "load_constant",
+      "k" : 1,
+      "bottom" : "",
+      "debug_info" : "const_31",
+      "n" : 1,
+      "weights" : {
+
+      },
+      "constant_blob" : 65
+    },
+    {
+      "bottom" : "226,const_31",
+      "alpha" : 1,
+      "operation" : 1,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "k.7",
+      "top" : "k.7",
+      "type" : "elementwise",
+      "name" : "k.7",
+      "beta" : 0
+    },
+    {
+      "name" : "233",
+      "weights" : {
+
+      },
+      "dst_w" : -1,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 4,
+      "type" : "reshape",
+      "dst_h" : 6,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "v.5",
+      "debug_info" : "233",
+      "dst_seq" : 1,
+      "dst_k" : 1500,
+      "top" : "233"
+    },
+    {
+      "axis_h" : 0,
+      "axis_w" : 2,
+      "bottom" : "k.7",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "transpose_25",
+      "top" : "transpose_25",
+      "type" : "transpose",
+      "name" : "transpose_25"
+    },
+    {
+      "axis_h" : 2,
+      "axis_w" : 0,
+      "bottom" : "q.7",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "transpose_26",
+      "top" : "transpose_26",
+      "type" : "transpose",
+      "name" : "transpose_26"
+    },
+    {
+      "bottom" : "transpose_26,transpose_25",
+      "weights" : {
+
+      },
+      "debug_info" : "qk.3",
+      "top" : "qk.3",
+      "type" : "batch_matmul",
+      "name" : "qk.3",
+      "channel_mode" : false
+    },
+    {
+      "bottom" : "qk.3",
+      "weights" : {
+
+      },
+      "nd_axis" : -1,
+      "debug_info" : "238",
+      "top" : "238",
+      "type" : "softmax_nd",
+      "name" : "238"
+    },
+    {
+      "axis_h" : 2,
+      "axis_w" : 0,
+      "bottom" : "233",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "transpose_27",
+      "top" : "transpose_27",
+      "type" : "transpose",
+      "name" : "transpose_27"
+    },
+    {
+      "bottom" : "238,transpose_27",
+      "weights" : {
+
+      },
+      "debug_info" : "240",
+      "top" : "240",
+      "type" : "batch_matmul",
+      "name" : "240",
+      "channel_mode" : false
+    },
+    {
+      "axis_h" : 2,
+      "axis_w" : 0,
+      "bottom" : "240",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "transpose_24",
+      "top" : "transpose_24",
+      "type" : "transpose",
+      "name" : "transpose_24"
+    },
+    {
+      "name" : "x.23",
+      "weights" : {
+
+      },
+      "dst_w" : 384,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 3,
+      "type" : "reshape",
+      "dst_h" : 1500,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "transpose_24",
+      "debug_info" : "x.23",
+      "dst_seq" : 1,
+      "dst_k" : 1,
+      "top" : "x.23"
+    },
+    {
+      "nB" : 384,
+      "top" : "248",
+      "has_biases" : 1,
+      "blob_weights_f16" : 69,
+      "nC" : 384,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "x.23",
+      "blob_biases" : 67,
+      "has_tanh" : 0,
+      "debug_info" : "248",
+      "name" : "248",
+      "has_prelu" : 0
+    },
+    {
+      "bottom" : "x.19,248",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "x.25",
+      "top" : "x.25",
+      "type" : "elementwise",
+      "name" : "x.25",
+      "beta" : 0
+    },
+    {
+      "name" : "254_reshape",
+      "weights" : {
+
+      },
+      "dst_w" : 384,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 4,
+      "type" : "reshape",
+      "dst_h" : 1,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "x.25",
+      "debug_info" : "254_reshape",
+      "dst_seq" : 1,
+      "dst_k" : 1500,
+      "top" : "254_reshape"
+    },
+    {
+      "bottom" : "254_reshape",
+      "weights" : {
+
+      },
+      "eps" : 9.9999997473787516e-06,
+      "debug_info" : "254_mvn",
+      "axis" : 1,
+      "normalization_mode" : 1,
+      "top" : "254_mvn",
+      "type" : "l2_normalize",
+      "name" : "254_mvn"
+    },
+    {
+      "bottom" : "",
+      "k" : 1,
+      "n" : 1,
+      "weights" : {
+
+      },
+      "h" : 1,
+      "debug_info" : "254_scale",
+      "constant_blob" : 71,
+      "top" : "254_scale_constant_in_scale",
+      "w" : 384,
+      "type" : "load_constant",
+      "name" : "254_scale_constant_in_scale"
+    },
+    {
+      "bottom" : "",
+      "k" : 1,
+      "n" : 1,
+      "weights" : {
+
+      },
+      "h" : 1,
+      "debug_info" : "254_scale",
+      "constant_blob" : 73,
+      "top" : "254_scale_constant_in_bias",
+      "w" : 384,
+      "type" : "load_constant",
+      "name" : "254_scale_constant_in_bias"
+    },
+    {
+      "bottom" : "254_mvn,254_scale_constant_in_scale",
+      "alpha" : 1,
+      "operation" : 1,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "254_scale",
+      "top" : "254_scale_mul_out",
+      "type" : "elementwise",
+      "name" : "254_scale_mul_out",
+      "beta" : 0
+    },
+    {
+      "bottom" : "254_scale_mul_out,254_scale_constant_in_bias",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "254_scale",
+      "top" : "254_scale",
+      "type" : "elementwise",
+      "name" : "254_scale",
+      "beta" : 0
+    },
+    {
+      "name" : "254",
+      "weights" : {
+
+      },
+      "dst_w" : 384,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 3,
+      "type" : "reshape",
+      "dst_h" : 1500,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "254_scale",
+      "debug_info" : "254",
+      "dst_seq" : 1,
+      "dst_k" : 1,
+      "top" : "254"
+    },
+    {
+      "nB" : 384,
+      "top" : "input.17",
+      "has_biases" : 1,
+      "blob_weights_f16" : 77,
+      "nC" : 1536,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "254",
+      "blob_biases" : 75,
+      "has_tanh" : 0,
+      "debug_info" : "input.17",
+      "name" : "input.17",
+      "has_prelu" : 0
+    },
+    {
+      "bottom" : "input.17",
+      "weights" : {
+
+      },
+      "mode" : 19,
+      "debug_info" : "x.29",
+      "top" : "x.29",
+      "type" : "activation",
+      "name" : "x.29"
+    },
+    {
+      "nB" : 1536,
+      "top" : "271",
+      "has_biases" : 1,
+      "blob_weights_f16" : 81,
+      "nC" : 384,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "x.29",
+      "blob_biases" : 79,
+      "has_tanh" : 0,
+      "debug_info" : "271",
+      "name" : "271",
+      "has_prelu" : 0
+    },
+    {
+      "bottom" : "x.25,271",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "x.31",
+      "top" : "x.31",
+      "type" : "elementwise",
+      "name" : "x.31",
+      "beta" : 0
+    },
+    {
+      "name" : "296_reshape",
+      "weights" : {
+
+      },
+      "dst_w" : 384,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 4,
+      "type" : "reshape",
+      "dst_h" : 1,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "x.31",
+      "debug_info" : "296_reshape",
+      "dst_seq" : 1,
+      "dst_k" : 1500,
+      "top" : "296_reshape"
+    },
+    {
+      "bottom" : "296_reshape",
+      "weights" : {
+
+      },
+      "eps" : 9.9999997473787516e-06,
+      "debug_info" : "296_mvn",
+      "axis" : 1,
+      "normalization_mode" : 1,
+      "top" : "296_mvn",
+      "type" : "l2_normalize",
+      "name" : "296_mvn"
+    },
+    {
+      "bottom" : "",
+      "k" : 1,
+      "n" : 1,
+      "weights" : {
+
+      },
+      "h" : 1,
+      "debug_info" : "296_scale",
+      "constant_blob" : 83,
+      "top" : "296_scale_constant_in_scale",
+      "w" : 384,
+      "type" : "load_constant",
+      "name" : "296_scale_constant_in_scale"
+    },
+    {
+      "bottom" : "",
+      "k" : 1,
+      "n" : 1,
+      "weights" : {
+
+      },
+      "h" : 1,
+      "debug_info" : "296_scale",
+      "constant_blob" : 85,
+      "top" : "296_scale_constant_in_bias",
+      "w" : 384,
+      "type" : "load_constant",
+      "name" : "296_scale_constant_in_bias"
+    },
+    {
+      "bottom" : "296_mvn,296_scale_constant_in_scale",
+      "alpha" : 1,
+      "operation" : 1,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "296_scale",
+      "top" : "296_scale_mul_out",
+      "type" : "elementwise",
+      "name" : "296_scale_mul_out",
+      "beta" : 0
+    },
+    {
+      "bottom" : "296_scale_mul_out,296_scale_constant_in_bias",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "296_scale",
+      "top" : "296_scale",
+      "type" : "elementwise",
+      "name" : "296_scale",
+      "beta" : 0
+    },
+    {
+      "name" : "296",
+      "weights" : {
+
+      },
+      "dst_w" : 384,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 3,
+      "type" : "reshape",
+      "dst_h" : 1500,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "296_scale",
+      "debug_info" : "296",
+      "dst_seq" : 1,
+      "dst_k" : 1,
+      "top" : "296"
+    },
+    {
+      "nB" : 384,
+      "top" : "q.9",
+      "has_biases" : 1,
+      "blob_weights_f16" : 89,
+      "nC" : 384,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "296",
+      "blob_biases" : 87,
+      "has_tanh" : 0,
+      "debug_info" : "q.9",
+      "name" : "q.9",
+      "has_prelu" : 0
+    },
+    {
+      "nB" : 384,
+      "top" : "k.9",
+      "has_biases" : 1,
+      "blob_weights_f16" : 93,
+      "nC" : 384,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "296",
+      "blob_biases" : 91,
+      "has_tanh" : 0,
+      "debug_info" : "k.9",
+      "name" : "k.9",
+      "has_prelu" : 0
+    },
+    {
+      "nB" : 384,
+      "top" : "v.9",
+      "has_biases" : 1,
+      "blob_weights_f16" : 97,
+      "nC" : 384,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "296",
+      "blob_biases" : 95,
+      "has_tanh" : 0,
+      "debug_info" : "v.9",
+      "name" : "v.9",
+      "has_prelu" : 0
+    },
+    {
+      "name" : "325",
+      "weights" : {
+
+      },
+      "dst_w" : -1,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 4,
+      "type" : "reshape",
+      "dst_h" : 6,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "q.9",
+      "debug_info" : "325",
+      "dst_seq" : 1,
+      "dst_k" : 1500,
+      "top" : "325"
+    },
+    {
+      "top" : "const_32",
+      "w" : 1,
+      "h" : 1,
+      "name" : "const_32",
+      "nd_rank" : 4,
+      "type" : "load_constant",
+      "k" : 1,
+      "bottom" : "",
+      "debug_info" : "const_32",
+      "n" : 1,
+      "weights" : {
+
+      },
+      "constant_blob" : 99
+    },
+    {
+      "bottom" : "325,const_32",
+      "alpha" : 1,
+      "operation" : 1,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "q.11",
+      "top" : "q.11",
+      "type" : "elementwise",
+      "name" : "q.11",
+      "beta" : 0
+    },
+    {
+      "name" : "332",
+      "weights" : {
+
+      },
+      "dst_w" : -1,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 4,
+      "type" : "reshape",
+      "dst_h" : 6,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "k.9",
+      "debug_info" : "332",
+      "dst_seq" : 1,
+      "dst_k" : 1500,
+      "top" : "332"
+    },
+    {
+      "top" : "const_33",
+      "w" : 1,
+      "h" : 1,
+      "name" : "const_33",
+      "nd_rank" : 4,
+      "type" : "load_constant",
+      "k" : 1,
+      "bottom" : "",
+      "debug_info" : "const_33",
+      "n" : 1,
+      "weights" : {
+
+      },
+      "constant_blob" : 101
+    },
+    {
+      "bottom" : "332,const_33",
+      "alpha" : 1,
+      "operation" : 1,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "k.11",
+      "top" : "k.11",
+      "type" : "elementwise",
+      "name" : "k.11",
+      "beta" : 0
+    },
+    {
+      "name" : "339",
+      "weights" : {
+
+      },
+      "dst_w" : -1,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 4,
+      "type" : "reshape",
+      "dst_h" : 6,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "v.9",
+      "debug_info" : "339",
+      "dst_seq" : 1,
+      "dst_k" : 1500,
+      "top" : "339"
+    },
+    {
+      "axis_h" : 0,
+      "axis_w" : 2,
+      "bottom" : "k.11",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "transpose_21",
+      "top" : "transpose_21",
+      "type" : "transpose",
+      "name" : "transpose_21"
+    },
+    {
+      "axis_h" : 2,
+      "axis_w" : 0,
+      "bottom" : "q.11",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "transpose_22",
+      "top" : "transpose_22",
+      "type" : "transpose",
+      "name" : "transpose_22"
+    },
+    {
+      "bottom" : "transpose_22,transpose_21",
+      "weights" : {
+
+      },
+      "debug_info" : "qk.5",
+      "top" : "qk.5",
+      "type" : "batch_matmul",
+      "name" : "qk.5",
+      "channel_mode" : false
+    },
+    {
+      "bottom" : "qk.5",
+      "weights" : {
+
+      },
+      "nd_axis" : -1,
+      "debug_info" : "344",
+      "top" : "344",
+      "type" : "softmax_nd",
+      "name" : "344"
+    },
+    {
+      "axis_h" : 2,
+      "axis_w" : 0,
+      "bottom" : "339",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "transpose_23",
+      "top" : "transpose_23",
+      "type" : "transpose",
+      "name" : "transpose_23"
+    },
+    {
+      "bottom" : "344,transpose_23",
+      "weights" : {
+
+      },
+      "debug_info" : "346",
+      "top" : "346",
+      "type" : "batch_matmul",
+      "name" : "346",
+      "channel_mode" : false
+    },
+    {
+      "axis_h" : 2,
+      "axis_w" : 0,
+      "bottom" : "346",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "transpose_20",
+      "top" : "transpose_20",
+      "type" : "transpose",
+      "name" : "transpose_20"
+    },
+    {
+      "name" : "x.35",
+      "weights" : {
+
+      },
+      "dst_w" : 384,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 3,
+      "type" : "reshape",
+      "dst_h" : 1500,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "transpose_20",
+      "debug_info" : "x.35",
+      "dst_seq" : 1,
+      "dst_k" : 1,
+      "top" : "x.35"
+    },
+    {
+      "nB" : 384,
+      "top" : "354",
+      "has_biases" : 1,
+      "blob_weights_f16" : 105,
+      "nC" : 384,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "x.35",
+      "blob_biases" : 103,
+      "has_tanh" : 0,
+      "debug_info" : "354",
+      "name" : "354",
+      "has_prelu" : 0
+    },
+    {
+      "bottom" : "x.31,354",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "x.37",
+      "top" : "x.37",
+      "type" : "elementwise",
+      "name" : "x.37",
+      "beta" : 0
+    },
+    {
+      "name" : "360_reshape",
+      "weights" : {
+
+      },
+      "dst_w" : 384,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 4,
+      "type" : "reshape",
+      "dst_h" : 1,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "x.37",
+      "debug_info" : "360_reshape",
+      "dst_seq" : 1,
+      "dst_k" : 1500,
+      "top" : "360_reshape"
+    },
+    {
+      "bottom" : "360_reshape",
+      "weights" : {
+
+      },
+      "eps" : 9.9999997473787516e-06,
+      "debug_info" : "360_mvn",
+      "axis" : 1,
+      "normalization_mode" : 1,
+      "top" : "360_mvn",
+      "type" : "l2_normalize",
+      "name" : "360_mvn"
+    },
+    {
+      "bottom" : "",
+      "k" : 1,
+      "n" : 1,
+      "weights" : {
+
+      },
+      "h" : 1,
+      "debug_info" : "360_scale",
+      "constant_blob" : 107,
+      "top" : "360_scale_constant_in_scale",
+      "w" : 384,
+      "type" : "load_constant",
+      "name" : "360_scale_constant_in_scale"
+    },
+    {
+      "bottom" : "",
+      "k" : 1,
+      "n" : 1,
+      "weights" : {
+
+      },
+      "h" : 1,
+      "debug_info" : "360_scale",
+      "constant_blob" : 109,
+      "top" : "360_scale_constant_in_bias",
+      "w" : 384,
+      "type" : "load_constant",
+      "name" : "360_scale_constant_in_bias"
+    },
+    {
+      "bottom" : "360_mvn,360_scale_constant_in_scale",
+      "alpha" : 1,
+      "operation" : 1,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "360_scale",
+      "top" : "360_scale_mul_out",
+      "type" : "elementwise",
+      "name" : "360_scale_mul_out",
+      "beta" : 0
+    },
+    {
+      "bottom" : "360_scale_mul_out,360_scale_constant_in_bias",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "360_scale",
+      "top" : "360_scale",
+      "type" : "elementwise",
+      "name" : "360_scale",
+      "beta" : 0
+    },
+    {
+      "name" : "360",
+      "weights" : {
+
+      },
+      "dst_w" : 384,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 3,
+      "type" : "reshape",
+      "dst_h" : 1500,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "360_scale",
+      "debug_info" : "360",
+      "dst_seq" : 1,
+      "dst_k" : 1,
+      "top" : "360"
+    },
+    {
+      "nB" : 384,
+      "top" : "input.25",
+      "has_biases" : 1,
+      "blob_weights_f16" : 113,
+      "nC" : 1536,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "360",
+      "blob_biases" : 111,
+      "has_tanh" : 0,
+      "debug_info" : "input.25",
+      "name" : "input.25",
+      "has_prelu" : 0
+    },
+    {
+      "bottom" : "input.25",
+      "weights" : {
+
+      },
+      "mode" : 19,
+      "debug_info" : "x.41",
+      "top" : "x.41",
+      "type" : "activation",
+      "name" : "x.41"
+    },
+    {
+      "nB" : 1536,
+      "top" : "377",
+      "has_biases" : 1,
+      "blob_weights_f16" : 117,
+      "nC" : 384,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "x.41",
+      "blob_biases" : 115,
+      "has_tanh" : 0,
+      "debug_info" : "377",
+      "name" : "377",
+      "has_prelu" : 0
+    },
+    {
+      "bottom" : "x.37,377",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "x.43",
+      "top" : "x.43",
+      "type" : "elementwise",
+      "name" : "x.43",
+      "beta" : 0
+    },
+    {
+      "name" : "402_reshape",
+      "weights" : {
+
+      },
+      "dst_w" : 384,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 4,
+      "type" : "reshape",
+      "dst_h" : 1,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "x.43",
+      "debug_info" : "402_reshape",
+      "dst_seq" : 1,
+      "dst_k" : 1500,
+      "top" : "402_reshape"
+    },
+    {
+      "bottom" : "402_reshape",
+      "weights" : {
+
+      },
+      "eps" : 9.9999997473787516e-06,
+      "debug_info" : "402_mvn",
+      "axis" : 1,
+      "normalization_mode" : 1,
+      "top" : "402_mvn",
+      "type" : "l2_normalize",
+      "name" : "402_mvn"
+    },
+    {
+      "bottom" : "",
+      "k" : 1,
+      "n" : 1,
+      "weights" : {
+
+      },
+      "h" : 1,
+      "debug_info" : "402_scale",
+      "constant_blob" : 119,
+      "top" : "402_scale_constant_in_scale",
+      "w" : 384,
+      "type" : "load_constant",
+      "name" : "402_scale_constant_in_scale"
+    },
+    {
+      "bottom" : "",
+      "k" : 1,
+      "n" : 1,
+      "weights" : {
+
+      },
+      "h" : 1,
+      "debug_info" : "402_scale",
+      "constant_blob" : 121,
+      "top" : "402_scale_constant_in_bias",
+      "w" : 384,
+      "type" : "load_constant",
+      "name" : "402_scale_constant_in_bias"
+    },
+    {
+      "bottom" : "402_mvn,402_scale_constant_in_scale",
+      "alpha" : 1,
+      "operation" : 1,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "402_scale",
+      "top" : "402_scale_mul_out",
+      "type" : "elementwise",
+      "name" : "402_scale_mul_out",
+      "beta" : 0
+    },
+    {
+      "bottom" : "402_scale_mul_out,402_scale_constant_in_bias",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "402_scale",
+      "top" : "402_scale",
+      "type" : "elementwise",
+      "name" : "402_scale",
+      "beta" : 0
+    },
+    {
+      "name" : "402",
+      "weights" : {
+
+      },
+      "dst_w" : 384,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 3,
+      "type" : "reshape",
+      "dst_h" : 1500,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "402_scale",
+      "debug_info" : "402",
+      "dst_seq" : 1,
+      "dst_k" : 1,
+      "top" : "402"
+    },
+    {
+      "nB" : 384,
+      "top" : "q.13",
+      "has_biases" : 1,
+      "blob_weights_f16" : 125,
+      "nC" : 384,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "402",
+      "blob_biases" : 123,
+      "has_tanh" : 0,
+      "debug_info" : "q.13",
+      "name" : "q.13",
+      "has_prelu" : 0
+    },
+    {
+      "nB" : 384,
+      "top" : "k.13",
+      "has_biases" : 1,
+      "blob_weights_f16" : 129,
+      "nC" : 384,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "402",
+      "blob_biases" : 127,
+      "has_tanh" : 0,
+      "debug_info" : "k.13",
+      "name" : "k.13",
+      "has_prelu" : 0
+    },
+    {
+      "nB" : 384,
+      "top" : "v.13",
+      "has_biases" : 1,
+      "blob_weights_f16" : 133,
+      "nC" : 384,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "402",
+      "blob_biases" : 131,
+      "has_tanh" : 0,
+      "debug_info" : "v.13",
+      "name" : "v.13",
+      "has_prelu" : 0
+    },
+    {
+      "name" : "431",
+      "weights" : {
+
+      },
+      "dst_w" : -1,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 4,
+      "type" : "reshape",
+      "dst_h" : 6,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "q.13",
+      "debug_info" : "431",
+      "dst_seq" : 1,
+      "dst_k" : 1500,
+      "top" : "431"
+    },
+    {
+      "top" : "const_34",
+      "w" : 1,
+      "h" : 1,
+      "name" : "const_34",
+      "nd_rank" : 4,
+      "type" : "load_constant",
+      "k" : 1,
+      "bottom" : "",
+      "debug_info" : "const_34",
+      "n" : 1,
+      "weights" : {
+
+      },
+      "constant_blob" : 135
+    },
+    {
+      "bottom" : "431,const_34",
+      "alpha" : 1,
+      "operation" : 1,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "q",
+      "top" : "q",
+      "type" : "elementwise",
+      "name" : "q",
+      "beta" : 0
+    },
+    {
+      "name" : "438",
+      "weights" : {
+
+      },
+      "dst_w" : -1,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 4,
+      "type" : "reshape",
+      "dst_h" : 6,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "k.13",
+      "debug_info" : "438",
+      "dst_seq" : 1,
+      "dst_k" : 1500,
+      "top" : "438"
+    },
+    {
+      "top" : "const_35",
+      "w" : 1,
+      "h" : 1,
+      "name" : "const_35",
+      "nd_rank" : 4,
+      "type" : "load_constant",
+      "k" : 1,
+      "bottom" : "",
+      "debug_info" : "const_35",
+      "n" : 1,
+      "weights" : {
+
+      },
+      "constant_blob" : 137
+    },
+    {
+      "bottom" : "438,const_35",
+      "alpha" : 1,
+      "operation" : 1,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "k",
+      "top" : "k",
+      "type" : "elementwise",
+      "name" : "k",
+      "beta" : 0
+    },
+    {
+      "name" : "445",
+      "weights" : {
+
+      },
+      "dst_w" : -1,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 4,
+      "type" : "reshape",
+      "dst_h" : 6,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "v.13",
+      "debug_info" : "445",
+      "dst_seq" : 1,
+      "dst_k" : 1500,
+      "top" : "445"
+    },
+    {
+      "axis_h" : 0,
+      "axis_w" : 2,
+      "bottom" : "k",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "transpose_17",
+      "top" : "transpose_17",
+      "type" : "transpose",
+      "name" : "transpose_17"
+    },
+    {
+      "axis_h" : 2,
+      "axis_w" : 0,
+      "bottom" : "q",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "transpose_18",
+      "top" : "transpose_18",
+      "type" : "transpose",
+      "name" : "transpose_18"
+    },
+    {
+      "bottom" : "transpose_18,transpose_17",
+      "weights" : {
+
+      },
+      "debug_info" : "qk",
+      "top" : "qk",
+      "type" : "batch_matmul",
+      "name" : "qk",
+      "channel_mode" : false
+    },
+    {
+      "bottom" : "qk",
+      "weights" : {
+
+      },
+      "nd_axis" : -1,
+      "debug_info" : "450",
+      "top" : "450",
+      "type" : "softmax_nd",
+      "name" : "450"
+    },
+    {
+      "axis_h" : 2,
+      "axis_w" : 0,
+      "bottom" : "445",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "transpose_19",
+      "top" : "transpose_19",
+      "type" : "transpose",
+      "name" : "transpose_19"
+    },
+    {
+      "bottom" : "450,transpose_19",
+      "weights" : {
+
+      },
+      "debug_info" : "452",
+      "top" : "452",
+      "type" : "batch_matmul",
+      "name" : "452",
+      "channel_mode" : false
+    },
+    {
+      "axis_h" : 2,
+      "axis_w" : 0,
+      "bottom" : "452",
+      "axis_k" : 1,
+      "axis_n" : 3,
+      "axis_seq" : 4,
+      "weights" : {
+
+      },
+      "debug_info" : "transpose_16",
+      "top" : "transpose_16",
+      "type" : "transpose",
+      "name" : "transpose_16"
+    },
+    {
+      "name" : "x.47",
+      "weights" : {
+
+      },
+      "dst_w" : 384,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 3,
+      "type" : "reshape",
+      "dst_h" : 1500,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "transpose_16",
+      "debug_info" : "x.47",
+      "dst_seq" : 1,
+      "dst_k" : 1,
+      "top" : "x.47"
+    },
+    {
+      "nB" : 384,
+      "top" : "460",
+      "has_biases" : 1,
+      "blob_weights_f16" : 141,
+      "nC" : 384,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "x.47",
+      "blob_biases" : 139,
+      "has_tanh" : 0,
+      "debug_info" : "460",
+      "name" : "460",
+      "has_prelu" : 0
+    },
+    {
+      "bottom" : "x.43,460",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "x.49",
+      "top" : "x.49",
+      "type" : "elementwise",
+      "name" : "x.49",
+      "beta" : 0
+    },
+    {
+      "name" : "466_reshape",
+      "weights" : {
+
+      },
+      "dst_w" : 384,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 4,
+      "type" : "reshape",
+      "dst_h" : 1,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "x.49",
+      "debug_info" : "466_reshape",
+      "dst_seq" : 1,
+      "dst_k" : 1500,
+      "top" : "466_reshape"
+    },
+    {
+      "bottom" : "466_reshape",
+      "weights" : {
+
+      },
+      "eps" : 9.9999997473787516e-06,
+      "debug_info" : "466_mvn",
+      "axis" : 1,
+      "normalization_mode" : 1,
+      "top" : "466_mvn",
+      "type" : "l2_normalize",
+      "name" : "466_mvn"
+    },
+    {
+      "bottom" : "",
+      "k" : 1,
+      "n" : 1,
+      "weights" : {
+
+      },
+      "h" : 1,
+      "debug_info" : "466_scale",
+      "constant_blob" : 143,
+      "top" : "466_scale_constant_in_scale",
+      "w" : 384,
+      "type" : "load_constant",
+      "name" : "466_scale_constant_in_scale"
+    },
+    {
+      "bottom" : "",
+      "k" : 1,
+      "n" : 1,
+      "weights" : {
+
+      },
+      "h" : 1,
+      "debug_info" : "466_scale",
+      "constant_blob" : 145,
+      "top" : "466_scale_constant_in_bias",
+      "w" : 384,
+      "type" : "load_constant",
+      "name" : "466_scale_constant_in_bias"
+    },
+    {
+      "bottom" : "466_mvn,466_scale_constant_in_scale",
+      "alpha" : 1,
+      "operation" : 1,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "466_scale",
+      "top" : "466_scale_mul_out",
+      "type" : "elementwise",
+      "name" : "466_scale_mul_out",
+      "beta" : 0
+    },
+    {
+      "bottom" : "466_scale_mul_out,466_scale_constant_in_bias",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "466_scale",
+      "top" : "466_scale",
+      "type" : "elementwise",
+      "name" : "466_scale",
+      "beta" : 0
+    },
+    {
+      "name" : "466",
+      "weights" : {
+
+      },
+      "dst_w" : 384,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 3,
+      "type" : "reshape",
+      "dst_h" : 1500,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "466_scale",
+      "debug_info" : "466",
+      "dst_seq" : 1,
+      "dst_k" : 1,
+      "top" : "466"
+    },
+    {
+      "nB" : 384,
+      "top" : "input.33",
+      "has_biases" : 1,
+      "blob_weights_f16" : 149,
+      "nC" : 1536,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "466",
+      "blob_biases" : 147,
+      "has_tanh" : 0,
+      "debug_info" : "input.33",
+      "name" : "input.33",
+      "has_prelu" : 0
+    },
+    {
+      "bottom" : "input.33",
+      "weights" : {
+
+      },
+      "mode" : 19,
+      "debug_info" : "x.53",
+      "top" : "x.53",
+      "type" : "activation",
+      "name" : "x.53"
+    },
+    {
+      "nB" : 1536,
+      "top" : "483",
+      "has_biases" : 1,
+      "blob_weights_f16" : 153,
+      "nC" : 384,
+      "weights" : {
+
+      },
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "x.53",
+      "blob_biases" : 151,
+      "has_tanh" : 0,
+      "debug_info" : "483",
+      "name" : "483",
+      "has_prelu" : 0
+    },
+    {
+      "bottom" : "x.49,483",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "x",
+      "top" : "x",
+      "type" : "elementwise",
+      "name" : "x",
+      "beta" : 0
+    },
+    {
+      "name" : "496_reshape",
+      "weights" : {
+
+      },
+      "dst_w" : 384,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 4,
+      "type" : "reshape",
+      "dst_h" : 1,
+      "mode" : 0,
+      "dynamic_shape" : false,
+      "bottom" : "x",
+      "debug_info" : "496_reshape",
+      "dst_seq" : 1,
+      "dst_k" : 1500,
+      "top" : "496_reshape"
+    },
+    {
+      "bottom" : "496_reshape",
+      "weights" : {
+
+      },
+      "eps" : 9.9999997473787516e-06,
+      "debug_info" : "496_mvn",
+      "axis" : 1,
+      "normalization_mode" : 1,
+      "top" : "496_mvn",
+      "type" : "l2_normalize",
+      "name" : "496_mvn"
+    },
+    {
+      "bottom" : "",
+      "k" : 1,
+      "n" : 1,
+      "weights" : {
+
+      },
+      "h" : 1,
+      "debug_info" : "496_scale",
+      "constant_blob" : 155,
+      "top" : "496_scale_constant_in_scale",
+      "w" : 384,
+      "type" : "load_constant",
+      "name" : "496_scale_constant_in_scale"
+    },
+    {
+      "bottom" : "",
+      "k" : 1,
+      "n" : 1,
+      "weights" : {
+
+      },
+      "h" : 1,
+      "debug_info" : "496_scale",
+      "constant_blob" : 157,
+      "top" : "496_scale_constant_in_bias",
+      "w" : 384,
+      "type" : "load_constant",
+      "name" : "496_scale_constant_in_bias"
+    },
+    {
+      "bottom" : "496_mvn,496_scale_constant_in_scale",
+      "alpha" : 1,
+      "operation" : 1,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "496_scale",
+      "top" : "496_scale_mul_out",
+      "type" : "elementwise",
+      "name" : "496_scale_mul_out",
+      "beta" : 0
+    },
+    {
+      "bottom" : "496_scale_mul_out,496_scale_constant_in_bias",
+      "alpha" : 1,
+      "operation" : 0,
+      "weights" : {
+
+      },
+      "fused_relu" : 0,
+      "debug_info" : "496_scale",
+      "top" : "496_scale",
+      "type" : "elementwise",
+      "name" : "496_scale",
+      "beta" : 0
+    },
+    {
+      "name" : "496",
+      "weights" : {
+
+      },
+      "dst_w" : 384,
+      "version" : 1,
+      "dst_n" : 1,
+      "dst_nd_rank" : 3,
+      "type" : "reshape",
+      "dst_h" : 1500,
+      "mode" : 0,
+      "attributes" : {
+        "is_output" : 1
+      },
+      "dynamic_shape" : false,
+      "bottom" : "496_scale",
+      "debug_info" : "496",
+      "dst_k" : 1,
+      "dst_seq" : 1,
+      "top" : "output"
+    }
+  ]
+}

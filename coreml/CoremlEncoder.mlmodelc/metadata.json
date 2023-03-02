@@ -1,0 +1,68 @@
+[
+  {
+    "metadataOutputVersion" : "3.0",
+    "storagePrecision" : "Mixed (Float32, Float16)",
+    "outputSchema" : [
+      {
+        "hasShapeFlexibility" : "0",
+        "isOptional" : "0",
+        "dataType" : "Float32",
+        "formattedType" : "MultiArray (Float32)",
+        "shortDescription" : "",
+        "shape" : "[]",
+        "name" : "output",
+        "type" : "MultiArray"
+      }
+    ],
+    "modelParameters" : [
+
+    ],
+    "specificationVersion" : 4,
+    "computePrecision" : "Float16",
+    "isUpdatable" : "0",
+    "availability" : {
+      "macOS" : "10.15",
+      "tvOS" : "13.0",
+      "watchOS" : "6.0",
+      "iOS" : "13.0",
+      "macCatalyst" : "13.0"
+    },
+    "neuralNetworkLayerTypeHistogram" : {
+      "Mvn" : 9,
+      "InnerProduct" : 24,
+      "Convolution" : 2,
+      "Gelu" : 6,
+      "Scale" : 9,
+      "ReshapeStatic" : 34,
+      "LoadConstantND" : 9,
+      "Transpose" : 17,
+      "Squeeze" : 2,
+      "Add" : 9,
+      "ExpandDims" : 2,
+      "Multiply" : 8,
+      "SoftmaxND" : 4,
+      "BatchedMatmul" : 8
+    },
+    "modelType" : {
+      "name" : "MLModelType_neuralNetwork"
+    },
+    "userDefinedMetadata" : {
+      "com.github.apple.coremltools.version" : "6.2",
+      "com.github.apple.coremltools.source" : "torch==1.13.1"
+    },
+    "generatedClassName" : "CoremlEncoder",
+    "inputSchema" : [
+      {
+        "hasShapeFlexibility" : "0",
+        "isOptional" : "0",
+        "dataType" : "Float32",
+        "formattedType" : "MultiArray (Float32 1 × 80 × 3000)",
+        "shortDescription" : "",
+        "shape" : "[1, 80, 3000]",
+        "name" : "mel_segment",
+        "type" : "MultiArray"
+      }
+    ],
+    "method" : "predict"
+  }
+]
