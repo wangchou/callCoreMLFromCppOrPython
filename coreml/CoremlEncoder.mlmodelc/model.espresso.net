@@ -13,7 +13,7 @@
   "layers" : [
     {
       "size_of_axes" : 1,
-      "bottom" : "mel_segment",
+      "bottom" : "melSegment",
       "axes_0" : -2,
       "weights" : {
 

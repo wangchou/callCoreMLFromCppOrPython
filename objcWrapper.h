@@ -4,7 +4,7 @@ extern "C" {
 
 const void* loadModel(const char* modelPath);
 void closeModel(const void* model);
-float* predictWith(const void* model, float* mel_segment);
+void predictWith(const void* model, float* melSegment, float* encoderOutput);
 
 #if __cplusplus
 }   // Extern C

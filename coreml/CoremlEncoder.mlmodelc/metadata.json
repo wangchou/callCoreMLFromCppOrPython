@@ -59,7 +59,7 @@
         "formattedType" : "MultiArray (Float32 1 × 80 × 3000)",
         "shortDescription" : "",
         "shape" : "[1, 80, 3000]",
-        "name" : "mel_segment",
+        "name" : "melSegment",
         "type" : "MultiArray"
       }
     ],

@@ -12,21 +12,21 @@
 
 @implementation CoremlEncoderInput
 
-- (instancetype)initWithMel_segment:(MLMultiArray *)mel_segment {
+- (instancetype)initWithMelSegment:(MLMultiArray *)melSegment {
     self = [super init];
     if (self) {
-        _mel_segment = mel_segment;
+        _melSegment = melSegment;
     }
     return self;
 }
 
 - (NSSet<NSString *> *)featureNames {
-    return [NSSet setWithArray:@[@"mel_segment"]];
+    return [NSSet setWithArray:@[@"melSegment"]];
 }
 
 - (nullable MLFeatureValue *)featureValueForName:(NSString *)featureName {
-    if ([featureName isEqualToString:@"mel_segment"]) {
-        return [MLFeatureValue featureValueWithMultiArray:self.mel_segment];
+    if ([featureName isEqualToString:@"melSegment"]) {
+        return [MLFeatureValue featureValueWithMultiArray:self.melSegment];
     }
     return nil;
 }
@@ -176,8 +176,8 @@
     return [[CoremlEncoderOutput alloc] initWithOutput:(MLMultiArray *)[outFeatures featureValueForName:@"output"].multiArrayValue];
 }
 
-- (nullable CoremlEncoderOutput *)predictionFromMel_segment:(MLMultiArray *)mel_segment error:(NSError * _Nullable __autoreleasing * _Nullable)error {
-    CoremlEncoderInput *input_ = [[CoremlEncoderInput alloc] initWithMel_segment:mel_segment];
+- (nullable CoremlEncoderOutput *)predictionFromMelSegment:(MLMultiArray *)melSegment error:(NSError * _Nullable __autoreleasing * _Nullable)error {
+    CoremlEncoderInput *input_ = [[CoremlEncoderInput alloc] initWithMelSegment:melSegment];
     return [self predictionFromFeatures:input_ error:error];
 }
 

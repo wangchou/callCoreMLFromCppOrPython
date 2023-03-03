@@ -16,10 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) __attribute__((visibility("hidden")))
 @interface CoremlEncoderInput : NSObject<MLFeatureProvider>
 
-/// mel_segment as 1 × 80 × 3000 3-dimensional array of floats
-@property (readwrite, nonatomic, strong) MLMultiArray * mel_segment;
+/// melSegment as 1 × 80 × 3000 3-dimensional array of floats
+@property (readwrite, nonatomic, strong) MLMultiArray * melSegment;
 - (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithMel_segment:(MLMultiArray *)mel_segment NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithMelSegment:(MLMultiArray *)melSegment NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -123,11 +123,11 @@ API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0)) __attribute__((
 
 /**
     Make a prediction using the convenience interface
-    @param mel_segment as 1 × 80 × 3000 3-dimensional array of floats:
+    @param melSegment as 1 × 80 × 3000 3-dimensional array of floats:
     @param error If an error occurs, upon return contains an NSError object that describes the problem. If you are not interested in possible errors, pass in NULL.
     @return the prediction as CoremlEncoderOutput
 */
-- (nullable CoremlEncoderOutput *)predictionFromMel_segment:(MLMultiArray *)mel_segment error:(NSError * _Nullable __autoreleasing * _Nullable)error;
+- (nullable CoremlEncoderOutput *)predictionFromMelSegment:(MLMultiArray *)melSegment error:(NSError * _Nullable __autoreleasing * _Nullable)error;
 
 /**
     Batch prediction
