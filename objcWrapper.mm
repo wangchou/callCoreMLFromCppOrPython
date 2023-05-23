@@ -24,13 +24,12 @@ void predictWith(const void* model, float* melSegment, float* encoderOutput) {
                                                                 deallocator: nil
                                                                       error: nil];
 
-    CoremlEncoderOutput *modelOutput = [(id)model predictionFromMelSegment:inMultiArray error:nil];
+    CoremlEncoderOutput *modelOutput = [(__bridge id)model predictionFromMelSegment:inMultiArray error:nil];
     MLMultiArray *outMA = modelOutput.output;
 
     cblas_scopy((int)outMA.count,
                 (float*)outMA.dataPointer, 1,
                 encoderOutput, 1);
-
 }
 
 void closeModel(const void* model) {
